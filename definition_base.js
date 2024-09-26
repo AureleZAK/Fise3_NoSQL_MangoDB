@@ -21,13 +21,26 @@ async function main() {
         db.dropCollection("Matchs")
         db.dropCollection("StatsJoueurs")
 
+        // On créé toutes les collections qui nous serons utile lors de ce projet
         const joueurs = db.collection('Joueurs');
         const equipes = db.collection('Equipes');   
         const matchs = db.collection('Matchs');  
 
+
         // Ajout des équipes de la saison 2020/2021 dans la collection
+        // Pour la création d'une équipe on suit toujours le même processus 
+        // On utilise la fonction .insertMany() pour ajouter plusieurs équipes simultanément
         const res_equipes = await equipes.insertMany([
-            { nom: "Paris-SG", couleur: ["rouge", "bleu", "blanc"], stade: "Parc des Princes", joueurs: ['Y. Saidani', 'Kenny Nagera', 'Mathyas Todisoa François Randriamamy', 'Kays Ruiz-Atil', 'K. Navas', 'Alexandre Letellier', 'Denis Franchi', 'Garissone Innocent', 'Presnel Kimpembe', 'Marcos  Aoás Corrêa', 'Juan Bernat Velasco', 'C. Dagba', 'Layvin Kurzawa', 'Abdou-Lakhad Diallo', 'Jan Thilo Kehrer', 'Marco Verratti', 'Leandro Daniel Paredes', 'Á. Di María', 'Danilo Luís Hélio Pereira', 'Ander Herrera Agüera', 'Julian Draxler', 'Idrissa Gana Gueye', 'I. Gharbi', 'E. Michut', 'X. Simons', 'Kylian Mbappé Lottin', 'Mauro Emanuel Icardi Rivero', 'Neymar da Silva Santos Júnior', 'Marcin Bulka', 'A. Kalimuendo-Muinga', 'T. Pembélé', 'Jesé Rodríguez Ruiz', 'Sergio Rico González', 'Alessandro Florenzi', 'Moise Bioty Kean', 'Rafael Alcântara do Nascimento', 'M. Bakker', 'A. Kamara', 'Pablo Sarabia García', 'M. Kapo'] },
+            { 
+              // On indique le nom de l'équipe
+              nom: "Paris-SG",
+               // On indique les couleurs de l'équipe
+              couleur: ["rouge", "bleu", "blanc"],
+              // On indique le stade de l'équipe 
+              stade: "Parc des Princes",
+              // On indique la liste de joueurs de l'équipe 
+              joueurs: ['Y. Saidani', 'Kenny Nagera', 'Mathyas Todisoa François Randriamamy', 'Kays Ruiz-Atil', 'K. Navas', 'Alexandre Letellier', 'Denis Franchi', 'Garissone Innocent', 'Presnel Kimpembe', 'Marcos  Aoás Corrêa', 'Juan Bernat Velasco', 'C. Dagba', 'Layvin Kurzawa', 'Abdou-Lakhad Diallo', 'Jan Thilo Kehrer', 'Marco Verratti', 'Leandro Daniel Paredes', 'Á. Di María', 'Danilo Luís Hélio Pereira', 'Ander Herrera Agüera', 'Julian Draxler', 'Idrissa Gana Gueye', 'I. Gharbi', 'E. Michut', 'X. Simons', 'Kylian Mbappé Lottin', 'Mauro Emanuel Icardi Rivero', 'Neymar da Silva Santos Júnior', 'Marcin Bulka', 'A. Kalimuendo-Muinga', 'T. Pembélé', 'Jesé Rodríguez Ruiz', 'Sergio Rico González', 'Alessandro Florenzi', 'Moise Bioty Kean', 'Rafael Alcântara do Nascimento', 'M. Bakker', 'A. Kamara', 'Pablo Sarabia García', 'M. Kapo'] 
+            },
             { nom: "Dijon Football Côte-d'Or", couleur: ["rouge", "noir", "blanc"], stade: "Stade Gaston-Gérard", joueurs: ['D. Ndong', 'W. Lautoa', 'Jacques Siwe', 'Charles Elyan Costes', 'Glody Ngonda Muzinga', 'Mickaël David Alphonse', 'B. Racovițan', 'E. Ebimbe', 'Amigo Alfred Benjamin Junior Gomis', 'Mama Samba Baldé', 'Roger Claver Djapone Assalé', 'S. Allagbé', 'S. Coulibaly', 'A. Ngouyamsa', 'B. Ecuele Manga', 'F. Sammaritano', 'A. Arlı', 'Jordan Marié', 'W. Younoussa', 'Aurélien Scheidler', 'E. Belhadji', 'Mihai-Alexandru Dobre', 'Mounir Chouiar', 'Aníbal Hernán Chalá Ayoví', 'Rayan Philippe', 'R. Rúnarsson', 'J. Panzo', 'Bersant Celina', 'Romain Amalfitano', 'Júlio Carolino Tavares', 'A. Zagré', 'P. Diop', 'Fouad Chafik', 'Anthony Racioppi', 'Lévi Kahamba Ntumba', 'Aboubakar Kamara', 'S. Boey', 'Pape Moussa Konaté', 'Yassine Benzia']},
             { nom: "Nîmes Olympique", couleur: ["rouge", "blanc"], stade: "Stade des Costières", joueurs: ['Sami Ben Amar', 'Nolan Roux', 'Karim Aribi', 'A. Cubas', 'Birger Solberg Meling', 'N. Chadli', 'Renaud Ripart', 'Lucas Lionel Dias', 'Amjhad Nazih', 'K. Guessoum', 'Pablo Martinez', 'Gaëtan Paquiez', 'Patrick Julien Burner', 'Anthony Briançon', 'Naomichi Ueda', 'S.Sarr', 'Niclas Eliasson Santana', 'Zinedine Ferhat', 'L.Fomba', 'A.Valério', 'Y.Benrahou', 'M.Doucouré', 'Moussa Koné', 'B.Reynet', 'M.Ahlinvi', 'L.Deaux', 'Romain Philippoteaux', 'L.Buadés', 'A.Malanda', 'Clément Dépres', 'M.Majouga', 'Florian Miguel', 'Haris Duljević', 'Ahoueke Steeve Kévin Denkey', 'S.Alakouch', 'Loïck Landre']},
             { nom: "Toulouse Football Club", couleur: ["violet", "blanc"], stade: "Stadium TFC", joueurs: ['Stéphane Thierry Zobo', 'S. Moreira', 'R. Gabrielsen', 'Iliès Soudani', 'Paul Bonneau', 'Jean-Philippe Celestin', 'Sacha Semaoun', 'A. Rogel', 'Florentin Lucien Jean Bloch', 'Deiver Andrés Machado Mena', 'Wesley Saïd', 'Thomas Himeur', 'Maxime Dupé', 'Carl Isak Emanuel Pettersson', 'Issiaga Sylla', 'B. Diakité', 'M. Diarra', 'A. Rouault', 'Branco van den Boomen', 'K. Serber', 'T.  Rapnouil-Zarandona', 'Stijn Spierings', 'S. Sanna', 'N. Skyttä', 'S. Mvoué', 'M. Bangré', 'N. N&apos;Goumou', 'Brecht Dejaegere', 'K. Keben', 'Rhys James Evitt-Healey', 'A. Taoui', 'K. Sidibé', 'K. Koné', 'Sébastien Tony Dewaest', 'Vakoun Issouf Bayo', 'Aaron Leya Iseka', 'Kelvin Amian Adou', 'J. Antiste', 'Firmin Ndombe Mubele', 'I. Sangaré', 'A. Adli', 'Mathieu Gonçalves', 'Samuel Kasongo', 'Efthymios Koulouris', 'M. Gradel', 'Mauro Daniel Goicoechea Furia']},
@@ -50,8 +63,26 @@ async function main() {
         ])
 
         // Ajout des joueurs de la saison 2020/2021 dans la collection
+        // Pour la création d'un joueur on suit toujours le même processus 
         const res_joueurs = await joueurs.insertMany([
-                { nom_joueur: 'Ludovic Baal', prenom: 'Ludovic', nom: 'Baal', position: 'defenseur', age: 36, date_naissance: '24\\/05\\/1986', taille: '176', poids: '75' },
+                { 
+                  // On indique le nom complet du joueur
+                  nom_joueur: 'Ludovic Baal', 
+                  // On indique le prénom du joueur
+                  prenom: 'Ludovic',
+                  // On indique le nom du joueur
+                  nom: 'Baal', 
+                  // On indique le poste du joueur
+                  position: 'defenseur', 
+                  // On indique l'âge du joueur
+                  age: 36,
+                  // On indique la date de naissance du joueur 
+                  date_naissance: '24\\/05\\/1986', 
+                  // On indique la taille du joueur
+                  taille: '176',
+                  // On indique le poids du joueur 
+                  poids: '75' 
+                },
                 { nom_joueur: 'Killian Benvindo', prenom: 'Killian', nom: 'Benvindo', position: 'attaquant', age: 21, date_naissance: '26\\/04\\/2001', taille: null, poids: null },
                 { nom_joueur: 'Cheick Djibril Bangoura', prenom: 'Cheick Djibril', nom: 'Bangoura', position: 'milieu', age: 21, date_naissance: '27\\/12\\/2001', taille: null, poids: null },
                 { nom_joueur: "Ferris N'Goma", prenom: 'Ferris', nom: "N'Goma", position: 'milieu', age: 29, date_naissance: '15\\/06\\/1993', taille: '175', poids: '69' },
@@ -846,15 +877,27 @@ async function main() {
                 { nom_joueur: 'Mauro Daniel Goicoechea Furia', prenom: 'Mauro Daniel', nom: 'Goicoechea Furia', position: 'gardien', age: 34, date_naissance: '27\\/03\\/1988', taille: '186', poids: '82' }       
         ])
 
+        // Pour la création d'un match on suit toujours le même processus 
         const res_matchs = await matchs.insertMany([
             {
+                // On indique l'équipe jouant à l'exterieur
                 exterieur: "Olympique lyonnais",
+                // On indique l'équipe jouant à domicile
                 equipe_domicile: "AS Monaco FC",
+                // On indique la compétition dans laquelle à lieu le match
                 ligue: "Ligue 1",
+                // On indique le score de l'équipe jouant à l'exterieur
                 score_exterieur: 1,
+                // On indique le score de l'équipe jouant à domicile
                 score_domicile: 3,
+                // On indile l'ensemble des joueurs de léquipe exterieur ayant joué le match
                 joueurs_exterieurs: [
-                  { nom: "Anthony Lopes", note: 7.5 },
+                  { 
+                    // On indique le nom complet du joueur ayant joué                    
+                    nom: "Anthony Lopes", 
+                    // On indique la note obtenue par le joueur au cours du match 
+                    note: 7.5 
+                  },
                   { nom: "Léo Dubois", note: 6.2 },
                   { nom: "Marcelo", note: 5.8 },
                   { nom: "Jason Grégory Marianne Denayer", note: 6.9 },
@@ -866,8 +909,9 @@ async function main() {
                   { nom: "Memphis Depay", note: 6.8 },
                   { nom: "Islam Slimani", note: 7.4 }
                 ],
+                // On indile l'ensemble des joueurs de léquipe domicile ayant joué le match
                 joueurs_domicile: [
-                  { nom: "Benjamin Lecomte", note: 8.0 },
+                  { nom: "Benjamin Lecomte",note: 8.0 },
                   { nom: "Ruben Aguilar", note: 6.6 },
                   { nom: "Benoît Badiashile", note: 7.3 },
                   { nom: "Axel Disasi", note: 6.4 },
@@ -1278,7 +1322,7 @@ async function main() {
             }                                    
         ])
     
-        // Création des indexs pour rechercher les équipes et les joueurs par nom
+        // Création des indexs pour optimiser la recherche des équipes et des joueurs par nom
         joueurs.createIndex({
             nom_joueur: 1 
         })

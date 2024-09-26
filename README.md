@@ -1,6 +1,16 @@
 # NoSQL MangoDB Matchs Foot
 
+## Fonctionnement
 
+Pour assurer le bon fonctionnement du projet, il est nécessaire d'installer le module MongoDB. Ce module permet de communiquer avec une base de données MongoDB.
+
+### Installation du module MongoDB
+
+1. **Assurez-vous d'avoir Node.js installé** : Si Node.js n'est pas installé sur votre machine, téléchargez-le et installez-le depuis [Node.js](https://nodejs.org/).
+
+2. **Installez le module MongoDB** : Dans le répertoire de votre projet, exécutez la commande suivante dans le terminal pour installer MongoDB : npm install mongodb
+  
+3. **Configurer MongoDB dans votre code** : Une fois l'installation terminée, vous pouvez utiliser MongoDB dans votre projet. Assurez-vous que le serveur MongoDB est en cours d'exécution et que vous avez bien configuré la connexion dans votre fichier JavaScript.
 
 ## Getting started
 

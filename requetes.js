@@ -20,6 +20,7 @@ async function main() {
         const matchs = db.collection('Matchs');  
 
         // Requete permettant de trouver un joueur pour un poste donné à un age max. (Ici, on cherche les attaquants de plus de 28 ans)
+        // On utilise la fonction .find() pour réaliser cette recherche
         const result = await joueurs.find(
             { 
                 $and: [
